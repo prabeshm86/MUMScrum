@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MUMScrum.Model.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row-fluid sortable">
+   
+    <div class="box span12">
+       
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon edit"></i><span class="break"></span>List of Employees</h2>
+            <div class="box-icon">
+                <a href="~/Employees/Create" class="btn btn-small btn-primary"><i class="halflings-icon plus"></i>Add a Employee</a>
+            </div>
+        </div>
+        <div class="box-content">
+           
+            <table class="table">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role.RoleName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                   
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsDeactivated)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role.RoleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDeactivated)
+                    </td>
+                    <td>
+
+                        <a class="btn btn-success" href="~/Employees/Details/@item.Id">
+                            <i class="halflings-icon white zoom-in"></i>
+                        </a>
+                        <a class="btn btn-info" href="~/Employees/Edit/@item.Id">
+                            <i class="halflings-icon white edit"></i>
+                        </a>
+                    </td>
+                </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $('#EmployeesMenu').addClass('active')
+        $('#BreadCrumMenu').html('Employees')
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

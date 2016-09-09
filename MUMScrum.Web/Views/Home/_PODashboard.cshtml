@@ -1,0 +1,65 @@
+﻿@using MUMScrum.Web.Helpers
+@model IEnumerable<MUMScrum.Web.Models.ProductSummaryViewModel>
+@{ var count = 0;}
+@foreach (var product in Model)
+{
+    if (count % 2 == 0)
+    {
+        @:</div><div class="row-fluid">
+    }
+        count++;
+        var color = Utility.GetRandomColor(count);
+    <div class="span3 statbox @color" onTablet="span6" onDesktop="span3" style="
+    width: 500px;
+    height: 280px;">
+
+        <div class="number" style="margin-top: 15px">@product.ProductName</div>
+        <div class="title"></div>
+        <div>
+            <div>
+                <div class="pull-right">
+                    <div class="span2" onTablet="span4" onDesktop="span2">
+                        <div class="circleStatsItemBox @color">
+                            <span class="percent">percent</span>
+                            <div class="circleStat">
+                                <input type="text" value="@product.PercentCompleted" class="whiteCircle" />
+                            </div>
+                            <div class="footer">
+                                <center><span>@product.ProductName</span></center>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="box-content" style="width:200px; margin-top: 40px">
+                    <ul class="dashboard-list metro" style="width:220px">
+                        <li class="@color">
+                            <strong>Sprint : </strong> @product.Sprints<br>
+                            <strong>Release :</strong> @product.Releases<br>
+                            <strong>Developers : </strong> @product.Developers<br>
+                            <strong>Testers :</strong> @product.Testers<br>
+                            <strong>Scrum Master : </strong> @product.ScrumMasters<br>
+                            <strong>Assigned User Story : </strong> @product.AssignedUserStories<br>
+                            <strong>UnAssigned User Story :</strong> @product.BacklogUserStories<br>
+                            @*<a style="color:white" href="#"></a>Since: Jul 25, 2012 11:09<br>*@
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="~/ProductBacklogs/Details/@product.ProductId"> Check Details</a>
+        </div>
+    </div>
+
+
+}
+   @section Scripts {
+       @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $('#BreadCrumMenu').html('Dashboard')
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

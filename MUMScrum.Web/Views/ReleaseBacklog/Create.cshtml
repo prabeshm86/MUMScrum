@@ -1,0 +1,83 @@
+﻿@model MUMScrum.Model.ReleaseBacklog
+
+@{
+    ViewBag.Title = "Create Backlogs";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row-fluid sortable">
+        <div class="box span12">
+            <div class="box-header" data-original-title>
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>Create a Release</h2>
+
+            </div>
+            <div class="box-content">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.ReleaseName, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.ReleaseName)
+                            @Html.ValidationMessageFor(model => model.ReleaseName)
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.ReleaseDate, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.ReleaseDate)
+                            @Html.ValidationMessageFor(model => model.ReleaseDate)
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.ProductBacklogId, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.DropDownList("ProductBacklogId", String.Empty)
+                            @Html.ValidationMessageFor(model => model.ProductBacklogId)
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.ScrumMaster, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.DropDownList("ScrumMasterId", String.Empty)
+                            @Html.ValidationMessageFor(model => model.ScrumMasterId)
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 controls">
+                            <input type="submit" value="Create" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#BreadCrumMenu').html('Release Backlog')
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

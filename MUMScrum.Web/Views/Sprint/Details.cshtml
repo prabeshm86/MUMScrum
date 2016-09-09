@@ -1,0 +1,161 @@
+﻿@model MUMScrum.Model.Sprint
+@using MUMScrum.Web.Helpers
+@{
+    ViewBag.Title = Model.SprintName + " - Details";
+}
+
+<h1>
+    @Model.SprintName
+    @if (MUMScrum.Web.Helpers.Utility.UserInRole(MUMScrum.Model.RoleEnum.ScrumMaster, Session))
+    {
+        <button class="btn btn-small btn-success float-right" onclick="location.href='/Sprint/Edit/@Model.Id';">Edit</button>
+        <a href="~/Sprint/Delete/@Model.Id" class="btn btn-primary btn-small btn-danger"> Delete</a>
+    }
+    <a href="~/ReleaseBacklog/Details/@Model.ReleaseBacklogId" class="btn btn-primary btn-small"> Back</a>
+</h1>
+<p>@Model.Description</p>
+<p>
+    Product :  <a href="~/ProductBacklogs/Details/@Model.ReleaseBacklog.ProductBacklogId">@Model.ReleaseBacklog.ProductBacklog.Name</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Release :  <a href="~/ReleaseBacklog/Details/@Model.ReleaseBacklogId">@Model.ReleaseBacklog.ReleaseName</a>
+</p>
+<p>
+    Date: @Model.StartDate.ToString("MM/dd/yy") &nbsp;&nbsp;-&nbsp;&nbsp; @Model.EndDate.ToString("MM/dd/yy")
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    No. of User Stories : @Model.UserStories.Count()
+</p>
+<p></p>
+<p></p>
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header">
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Burn Down Chart</h2>
+        </div>
+        <div class="box-content">
+            <div id="chart_div"></div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid sortable">
+    <div class="box span6">
+        <div class=" box-header">
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Unassigned User Stories</h2>
+            @if (Utility.UserInRole(MUMScrum.Model.RoleEnum.ProductOwner, Session))
+            {
+                <div class="box-icon">
+                    <a href="~/UserStory/Create?sprintId=@Model.Id&releaseId=@Model.ReleaseBacklogId&productId=@Model.ReleaseBacklog.ProductBacklogId" class="btn btn-primary btn-small"><i class="halflings-icon plus"></i>Add a User Story</a>
+                </div>
+            }
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Release</th>
+                        <th>Work Remaining</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var us in Model.UserStories.Where(i => i.DevelopedId == null && i.TesterId == null).ToList())
+                    {
+                        <tr>
+                            <td><a href="~/UserStory/Edit/@us.Id?return=sprint">@us.Title</a> </td>
+                            <td class="center"><a href="~/ReleaseBacklog/Details/@us.ReleaseId">@us.ReleaseBackLog.ReleaseName</a></td>
+                            <td class="center"> @us.WorkRemaining()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="box span6">
+        <div class=" box-header">
+            <h2><i class="halflings-icon user"></i><span class="break"></span>User Stories being Worked on</h2>
+
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Release</th>
+                        <th>Developer</th>
+                        <th>Tester</th>
+                        <th>Work Remaining</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var us in Model.UserStories.Where(i => i.DevelopedId != null || i.TesterId != null).ToList())
+                    {
+                        <tr>
+                            <td><a href="~/UserStory/Edit/@us.Id?return=sprint">@us.Title</a> </td>
+                            <td class="center"><a href="~/ReleaseBacklog/Details/@us.ReleaseId">@us.ReleaseBackLog.ReleaseName</a></td>
+                            <td>@us.Developer.FirstName</td>
+                            <td>@us.Tester.FirstName</td>
+                            <td class="center"> @us.WorkRemaining()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+        $('#BreadCrumMenu').html('Sprint')
+</script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload=
+{'modules':[{'name':'visualization','version':'1.1','packages':
+['corechart']}]}"></script>
+    <script>
+        $(document).ready(function () {
+            // Load the Visualization API and the piechart package.
+            google.load('visualization', '1', { 'packages': ['corechart'] });
+
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.setOnLoadCallback(GetBurndownChart);
+        });
+
+        function CreateChart(data) {
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.arrayToDataTable(data);
+            var options = {
+                title: 'Daily Burndown Chart',
+                vAxis: { title: 'Work Remaining' },
+                hAxis: { title: 'Date' },
+                seriesType: 'bars'
+
+            };
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, { width: 800, height: 340 });
+        }
+
+        function GetBurndownChart() {
+            $.ajax(
+           {
+               type: "Get",
+               url: "/api/BurnDownChart?sprintId=@Model.Id",
+               dataType: "json",
+               contentType: "application/json; charset=utf-8",
+               beforeSend: function () {
+                   //$('#AjaxImage').show();
+               },
+               error: function () {
+                   console.log("Error loading Burndown chart!");
+               },
+               success: function (jsonData) {
+
+                   CreateChart(jsonData)
+                   ;
+               }
+           }
+       );
+        }
+    </script>
+}

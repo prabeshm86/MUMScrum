@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUMScrum.Web", "MUMScrum.Web\MUMScrum.Web.csproj", "{D2F13140-19BE-4CB0-A011-490E51089166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUMScrum.Web.Tests", "MUMScrum.Web.Tests\MUMScrum.Web.Tests.csproj", "{5B3F9B4A-ED50-4CD0-9680-4AD6F2A6E3DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUMScrum.DataAccess", "MUMScrum.DataAccess\MUMScrum.DataAccess.csproj", "{EF9BD7E2-22C2-44A8-A027-1773D1D43538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUMScrum.Model", "MUMScrum.Model\MUMScrum.Model.csproj", "{07A23DC0-C19B-402B-8932-DED9F3C57340}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUMScrum.HR", "MUMScrum.HR\MUMScrum.HR.csproj", "{44D91BED-5E60-4C24-AEEA-A23D7B143FBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUMScrum.BusinessService", "MUMScrum.BusinessService\MUMScrum.BusinessService.csproj", "{5FC8E10B-AF0B-4BC4-9BDE-82A19E7EC691}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2F13140-19BE-4CB0-A011-490E51089166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F13140-19BE-4CB0-A011-490E51089166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F13140-19BE-4CB0-A011-490E51089166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F13140-19BE-4CB0-A011-490E51089166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3F9B4A-ED50-4CD0-9680-4AD6F2A6E3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3F9B4A-ED50-4CD0-9680-4AD6F2A6E3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3F9B4A-ED50-4CD0-9680-4AD6F2A6E3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3F9B4A-ED50-4CD0-9680-4AD6F2A6E3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9BD7E2-22C2-44A8-A027-1773D1D43538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9BD7E2-22C2-44A8-A027-1773D1D43538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9BD7E2-22C2-44A8-A027-1773D1D43538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9BD7E2-22C2-44A8-A027-1773D1D43538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A23DC0-C19B-402B-8932-DED9F3C57340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A23DC0-C19B-402B-8932-DED9F3C57340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A23DC0-C19B-402B-8932-DED9F3C57340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A23DC0-C19B-402B-8932-DED9F3C57340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44D91BED-5E60-4C24-AEEA-A23D7B143FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44D91BED-5E60-4C24-AEEA-A23D7B143FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44D91BED-5E60-4C24-AEEA-A23D7B143FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44D91BED-5E60-4C24-AEEA-A23D7B143FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC8E10B-AF0B-4BC4-9BDE-82A19E7EC691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC8E10B-AF0B-4BC4-9BDE-82A19E7EC691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC8E10B-AF0B-4BC4-9BDE-82A19E7EC691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC8E10B-AF0B-4BC4-9BDE-82A19E7EC691}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://prabesh.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MUMScrum.BusinessService\\MUMScrum.BusinessService.csproj
+		SccProjectName1 = MUMScrum.BusinessService
+		SccLocalPath1 = MUMScrum.BusinessService
+		SccProjectUniqueName2 = MUMScrum.DataAccess\\MUMScrum.DataAccess.csproj
+		SccProjectName2 = MUMScrum.DataAccess
+		SccLocalPath2 = MUMScrum.DataAccess
+		SccProjectUniqueName3 = MUMScrum.HR\\MUMScrum.HR.csproj
+		SccProjectName3 = MUMScrum.HR
+		SccLocalPath3 = MUMScrum.HR
+		SccProjectUniqueName4 = MUMScrum.Model\\MUMScrum.Model.csproj
+		SccProjectName4 = MUMScrum.Model
+		SccLocalPath4 = MUMScrum.Model
+		SccProjectUniqueName5 = MUMScrum.Web.Tests\\MUMScrum.Web.Tests.csproj
+		SccProjectName5 = MUMScrum.Web.Tests
+		SccLocalPath5 = MUMScrum.Web.Tests
+		SccProjectUniqueName6 = MUMScrum.Web\\MUMScrum.Web.csproj
+		SccProjectName6 = MUMScrum.Web
+		SccLocalPath6 = MUMScrum.Web
+	EndGlobalSection
+EndGlobal

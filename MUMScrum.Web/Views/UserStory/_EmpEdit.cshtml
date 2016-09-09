@@ -1,0 +1,179 @@
+﻿@model MUMScrum.Model.UserStory
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row-fluid sortable">
+        <div class="box span6">
+            <div class="box-header" data-original-title>
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>Edit User Story (Developer/Tester View)</h2>
+            </div>
+            <div class="box-content">
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.DisplayFor(model => model.Title)
+                            @Html.HiddenFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.DevelopedId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @*@Html.DropDownList("DevelopedId", null, "- None -", htmlAttributes: new { @class = "form-control" })*@
+                            @Html.DisplayFor(model => model.Developer.FirstName)
+                            @Html.ValidationMessageFor(model => model.DevelopedId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.TesterId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @* @Html.DropDownList("TesterId", null, "- None -", htmlAttributes: new { @class = "form-control" })*@
+                            @Html.DisplayFor(model => model.Tester.FirstName)
+                            @Html.ValidationMessageFor(model => model.TesterId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.ProductBackLogId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.DisplayFor(model => model.ProductBackLog.Name)
+                            @*@Html.DropDownList("ProductBackLogId", null, "Select Product",
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control",
+                                    @onChange = "GetAllRelease()",
+                                    id = "ProductDropList",
+                                    disabled = "disabled"
+                                })*@
+                            @Html.ValidationMessageFor(model => model.ProductBackLogId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.ReleaseId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @*@Html.DropDownList("ReleaseId", null, "- None -", htmlAttributes: new
+                                {
+                                    @class = "form-control",
+                                    @id = "ddlRelease",
+                                    @disabled = "disabled",
+                                    @onChange = "GetSprintByRelease()"
+                                })*@
+                            @Html.DisplayFor(model => model.ReleaseBackLog.ReleaseName)
+                            @Html.Hidden("hdnRelease", Model.ReleaseId, new { id = "hdnReleaseId" })
+                            @*@Html.HiddenFor(model => model.ReleaseId, new { id = "" })*@
+                            @Html.ValidationMessageFor(model => model.ReleaseId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.SprintId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @if (Model.Sprint == null)
+                            {
+                                <span>No Sprint</span>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(model => model.Sprint.SprintName);
+                            }
+                            @*@Html.DropDownList("SprintId", null, "- None -", htmlAttributes: new
+                                {
+                                    @class = "form-control",
+                                    @id = "ddlSprint",
+                                    @disabled = "disabled"
+
+                                })*@
+                            @Html.Hidden("hdnSprint", Model.SprintId, new { id = "hdnSprintId", style = "display:none;" })
+                            @Html.ValidationMessageFor(model => model.SprintId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @if (MUMScrum.Web.Helpers.Utility.UserInRole(MUMScrum.Model.RoleEnum.Developer, Session))
+                    {
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.DevEstimate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="controls">
+                                @Html.EditorFor(model => model.DevEstimate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DevEstimate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.DevActual, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="controls">
+                                @Html.EditorFor(model => model.DevActual, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DevActual, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    }
+
+                    @if (MUMScrum.Web.Helpers.Utility.UserInRole(MUMScrum.Model.RoleEnum.Tester, Session))
+                    {
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.TestEstiamte, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="controls">
+                                @Html.EditorFor(model => model.TestEstiamte, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TestEstiamte, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.TestActual, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="controls">
+                                @Html.EditorFor(model => model.TestActual, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TestActual, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 controls">
+                            <input type="submit" value="Save" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/UserStoryController.js"></script>
+    <script type="text/javascript">
+        $('#BreadCrumMenu').html('User Story')
+    </script>
+    <script type="text/javascript">
+        $('#UstoriesMenu').addClass('active')
+    </script>
+}
+

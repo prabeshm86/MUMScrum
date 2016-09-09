@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MUMScrum.Model.ReleaseBacklog>
+
+@{
+    ViewBag.Title = "Release Backlogs";
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon edit"></i><span class="break"></span>List of Releases assigned to me</h2>  
+            @*<div class="box-icon">
+                <a href="~/ReleaseBacklog/Create" class="btn btn-primary btn-small"><i class="halflings-icon plus"></i>Add a Release</a>
+            </div>*@          
+        </div>
+        <div class="box-content">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReleaseName)
+                    </th>
+                    <th>
+                       Product
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReleaseDate)
+                    </th>
+
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="/ReleaseBacklog/Details/@item.Id">@item.ReleaseName</a>
+                            @*@Html.DisplayFor(modelItem => item.ReleaseName)*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductBacklog.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReleaseDate)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#BreadCrumMenu').html('Release Backlog')
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

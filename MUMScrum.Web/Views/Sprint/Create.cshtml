@@ -1,0 +1,91 @@
+﻿@model MUMScrum.Model.Sprint
+
+@{
+    ViewBag.Title = "Create Sprint";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row-fluid sortable">
+        <div class="box span6">
+            <div class="box-header" data-original-title>
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>Create a Sprint</h2>
+            </div>
+            <div class="box-content">
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true)
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.SprintName, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.SprintName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SprintName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Description,new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description,"", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.SprintRunning, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.SprintRunning, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SprintRunning, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StartDate,"", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.EditorFor(model => model.EndDate,new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EndDate,"", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.ReleaseBacklogId, new { @class = "control-label col-md-2" })
+                        <div class="controls">
+                            @Html.DropDownList("ReleaseBacklogId", String.Empty)
+                            @Html.ValidationMessageFor(model => model.ReleaseBacklogId)
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 controls">
+                            <input type="submit" value="Save" class="btn btn-default btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#BreadCrumMenu').html('Sprint')
+    </script>
+}

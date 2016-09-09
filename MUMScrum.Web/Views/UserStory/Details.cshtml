@@ -1,0 +1,85 @@
+﻿@model MUMScrum.Model.UserStory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserStory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Developer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Developer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductBackLog.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductBackLog.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseBackLog.ReleaseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseBackLog.ReleaseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sprint.SprintName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sprint.SprintName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tester.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tester.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+        $('#BreadCrumMenu').html('User Story')
+</script>
+    <script type="text/javascript">
+        $('#UstoriesMenu').addClass('active')
+    </script>
+}
